@@ -4,8 +4,10 @@ using System.Text;
 
 namespace AsciidocLibrary
 {
+    // type
     internal interface FileReturn
     {
+    
         
     }
 }
