@@ -6,6 +6,6 @@ namespace AsciidocLibrary
 {
     internal interface FileReturn
     {
-        void visitor();
+        
     }
 }
