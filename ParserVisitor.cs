@@ -5,10 +5,7 @@ namespace AsciidocLibrary
 {
     internal interface ParserVisitor
     {
-         MarkDown changeMarkDown(MarkDown str);
-
-         TextFile changeTextFile(TextFile str);
-
+        HtmlType changeToHtml(HtmlType type);
 
         
     }
