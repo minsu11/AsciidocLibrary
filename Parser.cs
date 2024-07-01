@@ -4,7 +4,8 @@ namespace AsciidocLibrary
 {
     internal interface Parser
     {
-        FileReturn FileParser(); // visitor accept
+        // IComponent
+        Parser FileParser(ParserVisitor parser); // visitor accept
 
 
     }
