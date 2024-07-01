@@ -4,10 +4,8 @@ using System.Text;
 
 namespace AsciidocLibrary
 {
-    // type
-    internal interface FileType
+    internal class ParserComponent : ParserVisitor
     {
-    
         
     }
 }
