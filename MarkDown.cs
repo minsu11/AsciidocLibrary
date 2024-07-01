@@ -4,13 +4,13 @@ using System.Text;
 
 namespace AsciidocLibrary
 {
-    internal class MarkDown : Parser
+    internal class HtmlType : Parser
     {
         private string str;
 
         public Parser FileParser(ParserVisitor visitor)
         {
-            return visitor.changeMarkDown(this);
+            return visitor.changeToHtml(this);
         }
         
     }
