@@ -4,12 +4,12 @@ using System.Text;
 
 namespace AsciidocLibrary
 {
-    internal class TextFile : Parser
+    public class TextFile : Parser
    {
-        public Parser FileParser(ParserVisitor parser)
+        public void FileParser(ParserVisitor parser)
         {
 
-            return parser.changeTextFile(this);
+             parser.changeToTxt(this);
         }
         
 

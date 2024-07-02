@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AsciidocLibrary
 {
-    internal class HtmlType : Parser
+    public class HtmlType : Parser
     {
         private string str;
 
@@ -13,9 +13,9 @@ namespace AsciidocLibrary
             this.str = str;
         }
         
-        public Parser FileParser(ParserVisitor visitor)
+        public void FileParser(ParserVisitor visitor)
         {
-            return visitor.changeToHtml(this);
+            visitor.changeToHtml(this);
         }
         
         public string Str
