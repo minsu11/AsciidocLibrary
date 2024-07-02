@@ -8,10 +8,22 @@ namespace AsciidocLibrary
     {
         private string str;
 
+        public HtmlType(string str)
+        {
+            this.str = str;
+        }
+        
         public Parser FileParser(ParserVisitor visitor)
         {
             return visitor.changeToHtml(this);
         }
         
+        public string Str
+        {
+            get { return str; }
+            set { str = value; }
+        }
+
+
     }
 }

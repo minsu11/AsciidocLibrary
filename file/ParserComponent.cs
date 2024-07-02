@@ -6,6 +6,11 @@ namespace AsciidocLibrary
 {
     internal class ParserComponent : ParserVisitor
     {
+        public HtmlType changeToHtml(HtmlType html)
+        {
+            
+            return null;
+        }
       
         
     }
