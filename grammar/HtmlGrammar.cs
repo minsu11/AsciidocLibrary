@@ -23,5 +23,6 @@ namespace AsciidocLibrary.grammar
         {
             return "<b>"+content+"</b>";
         }
+
     }
 }
