@@ -6,6 +6,5 @@ namespace AsciidocLibrary
     {
         void FileParser(ParserVisitor parser); // visitor accept
 
-
     }
 }

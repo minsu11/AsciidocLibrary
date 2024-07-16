@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AsciidocLibrary.grammar
+namespace AsciidocLibrary.asciidoctoken
 {
-    public class HtmlGrammar 
+    public abstract class Token
     {
-        
+
     }
 }
