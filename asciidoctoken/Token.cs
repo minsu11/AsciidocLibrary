@@ -13,7 +13,7 @@ namespace AsciidocLibrary.asciidoctoken
             this.content = content;
         }
 
-        public String Accept(GrammarVisitor grammarVisitor)
+        public virtual string Accept(GrammarVisitor grammarVisitor)
         {
             return grammarVisitor.visit(this);
         }

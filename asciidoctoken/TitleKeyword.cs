@@ -11,8 +11,9 @@ namespace AsciidocLibrary.asciidoctoken
     {
         public TitleKeyword(string title) : base(title) {
         }
-
-        public string accept(GrammarVisitor grammarVisitor)
+       
+        
+        public override string Accept(GrammarVisitor grammarVisitor)
         {
             return grammarVisitor.visit(this);
         }

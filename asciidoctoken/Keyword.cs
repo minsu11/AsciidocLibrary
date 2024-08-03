@@ -13,10 +13,9 @@ namespace AsciidocLibrary.asciidoctoken
         // [%hardbreak]와 같은 문법
 
         public Keyword(string content) : base(content) {
-            
         }
 
-        public string visit(GrammarVisitor grammarVisitor)
+        public override string Accept(GrammarVisitor grammarVisitor)
         {
             return grammarVisitor.visit(this);
         }

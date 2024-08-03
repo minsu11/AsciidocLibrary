@@ -17,7 +17,7 @@ namespace AsciidocLibrary
         /**
          * String tokenize
          */
-        public Token[] tokenization(string[] arrToken)
+        public Token[] Tokenization(string[] arrToken)
         {
             checkNull(arrToken);
             

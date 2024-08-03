@@ -12,12 +12,19 @@ namespace AsciidocLibrary
         {
         }
 
-        public static string process(String content)
+        private static string ContentProcess(String content)
         {
             string[] parserStr = content.Split("\n"); // \n으로 문단 구분
 
             return "";
         }
+
+        public static string Process(string content)
+        {
+            return ContentProcess(content);
+        }
+        
+
 
         
     }

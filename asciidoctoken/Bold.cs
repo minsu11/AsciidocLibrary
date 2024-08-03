@@ -1,18 +1,18 @@
-﻿using AsciidocLibrary.grammar;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using AsciidocLibrary.grammar;
 
 namespace AsciidocLibrary.asciidoctoken
 {
-    internal class Image : Token
+    internal class Bold : Token
     {
-        public Image(string imageUrl) : base(imageUrl) { 
+        public Bold(string content) : base(content)
+        {
         }
 
         public override string Accept(GrammarVisitor grammarVisitor)
         {
+
             return grammarVisitor.visit(this);
+            
         }
     }
 }
