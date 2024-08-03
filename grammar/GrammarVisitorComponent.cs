@@ -7,9 +7,23 @@ namespace AsciidocLibrary.grammar
 {
     internal class GrammarVisitorComponent : GrammarVisitor
     {
-        public void visit(Token token)
+        public string visit(Token token)
+        {
+            return "";
+        }
+        public string visit(Keyword keywordToken)
+        {
+            return "";
+        }
+        public string visit(TitleKeyword titleKeywordToken)
         {
 
+            return "";
         }
+        public string visit(Image image)
+        {
+            return "";
+        }
+
     }
 }
