@@ -44,7 +44,7 @@ namespace AsciidocLibrary
 
         private static string checkBold(String str)
         {
-
+            return "";
         }
        
     }
