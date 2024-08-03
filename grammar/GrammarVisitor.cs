@@ -7,8 +7,11 @@ namespace AsciidocLibrary.grammar
 {
     internal interface GrammarVisitor
     {
-        void visit(Keyword keywordToken);
-        void visit(TitleKeyword titleKeywordToken);
+        string visit(Token token);
+        string visit(Keyword keywordToken);
+        string visit(TitleKeyword titleKeywordToken);
+
+        string visit(Image image);
 
     }
 }

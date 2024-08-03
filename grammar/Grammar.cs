@@ -2,6 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 using AsciidocLibrary.asciidoctoken;
+using AsciidocLibrary.grammar;
+
+namespace AsciidocLibrary
+{
+    internal interface Grammar
+    {
+        public String Accept(GrammarVisitor grammarVisitor);
+
+    }
+}
 //문단(Paragraphs) 메서드
 
 
@@ -29,10 +39,3 @@ using AsciidocLibrary.asciidoctoken;
 /*
  * 다음 문단이 read line인지 확인하는 메서드
  */
-namespace AsciidocLibrary
-{
-    internal interface Grammar
-    {
-        public String accept(Token token);
-    }
-}

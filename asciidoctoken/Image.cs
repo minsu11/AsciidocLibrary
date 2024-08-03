@@ -5,14 +5,12 @@ using System.Text;
 
 namespace AsciidocLibrary.asciidoctoken
 {
-    // Level 0 title 밑에 나오는 문법
-    // 
-    internal class TitleKeyword : Token
+    internal class Image : Token
     {
-        public TitleKeyword(string title) : base(title) {
+        public Image(string imageUrl) : base(imageUrl) { 
         }
 
-        public string accept(GrammarVisitor grammarVisitor)
+        public string Accept(GrammarVisitor grammarVisitor)
         {
             return grammarVisitor.visit(this);
         }
