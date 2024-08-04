@@ -7,15 +7,20 @@ namespace AsciidocLibrary.asciidoctoken
 {
     internal abstract class Token : Grammar
     {
-        private string content { get; }
+        private string Content;
 
-        public Token(string content) { 
-            this.content = content;
+        protected Token(string Content) { 
+            this.Content = Content;
         }
 
         public virtual string Accept(GrammarVisitor grammarVisitor)
         {
             return grammarVisitor.visit(this);
+        }
+
+        public string GetContent()
+        {
+            return Content;
         }
 
     }

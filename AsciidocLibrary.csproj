@@ -9,4 +9,8 @@
     <Folder Include="file\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="asciidoctoken\impl.cs" />
+  </ItemGroup>
+
 </Project>
