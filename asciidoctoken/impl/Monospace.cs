@@ -8,7 +8,7 @@ namespace AsciidocLibrary.asciidoctoken
      * html 변환
      * <em><code>test</code></em>
      */
-    internal class Monospace : Token
+    public class Monospace : Token
     {
         public Monospace(string content) : base(content)
         {

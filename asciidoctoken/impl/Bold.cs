@@ -2,7 +2,7 @@ using AsciidocLibrary.grammar;
 
 namespace AsciidocLibrary.asciidoctoken
 {
-    internal class Bold : Token
+    public class Bold : Token
     {
         public Bold(string content) : base(content)
         {

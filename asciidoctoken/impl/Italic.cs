@@ -2,7 +2,9 @@ using AsciidocLibrary.grammar;
 
 namespace AsciidocLibrary.asciidoctoken
 {
-    internal class Italic : Token 
+    // 글씨 기울임
+    
+    public class Italic : Token 
     {
         public Italic(string content) : base(content)
         {

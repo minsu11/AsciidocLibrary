@@ -12,18 +12,18 @@ namespace AsciidocLibrary
 
         public static string GetHtmlForm(string headTitle, string headContent, string content)
         {
-            return "<!DOCTYPE html>"
-                    + "<html lang=\"ko\">"
-                    + "<head>"
-                    + "<meta charset=\"UTF-8\">"
-                    + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
-                    + "<title>" + headTitle + "</title>"
+            return "<!DOCTYPE html>\n"
+                    + "<html lang=\"ko\">\n"
+                    + "<head>\n"
+                    + "<meta charset=\"UTF-8\">\n"
+                    + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+                    + "<title>\n" + headTitle + "</title>\n"
                     + headContent 
-                    + "</head>"
-                    + "<body>"
+                    + "</head\n>"
+                    + "<body>\n"
                     + content
-                    + "</body>"
-                    + "</html>";
+                    + "</body>\n"
+                    + "</html>\n";
         }
         public static string GetHtmlForm(string content)
         {

@@ -8,7 +8,7 @@ namespace AsciidocLibrary.asciidoctoken
      * include::included.adoc[]
      * 
      */
-    internal class IncludeFile : Token
+    public class IncludeFile : Token
     {
         public IncludeFile(string content) : base(content)
         {

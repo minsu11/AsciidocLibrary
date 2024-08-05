@@ -12,6 +12,14 @@ v1.0, 2024-07-30
 
 이것은 간단한 문단입니다. AsciiDoc은 다양한 텍스트 스타일을 지원합니다. *굵게*, _기울임_, `코드`, 그리고 `+dsa 고정 폭    텍스트+` 등이 가능합니다.
 
+Hello, NHN Academy.
+[%hardbreak]
+This is a second line with a hard break.
+[%hardbreak]
+This line should be separated by a break tag.
+
+
+
 
 [NOTE]
 ====
@@ -27,13 +35,24 @@ dsa
 
 === 불릿 목록
 
+
+
 * 첫 번째 항목
+
 * 두 번째 항목
 * 세 번째 항목
 
+
+
 === 번호 목록
 
-... apple
+[%hardbreaks]
+dsada
+dsadas
+
+dsada
+dsa
+
 . 첫 번째 항목
 .. 첫 번째 항목의 하위 항목
 . 두 번째 항목

@@ -3,7 +3,7 @@ using AsciidocLibrary.grammar;
 namespace AsciidocLibrary.asciidoctoken
 {
     // <p> 내용 </p>
-    internal class Content : Token
+    public class Content : Token
     {
         public Content(string content) : base(content)
         {

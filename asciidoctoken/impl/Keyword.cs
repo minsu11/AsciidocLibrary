@@ -7,10 +7,11 @@ using System.Transactions;
 
 namespace AsciidocLibrary.asciidoctoken
 {
-    internal class Keyword : Token
+    public class Keyword : Token
     {
         private string content;
         // [%hardbreak]와 같은 문법
+        // [%reversed]
 
         public Keyword(string content) : base(content) {
         }

@@ -33,7 +33,7 @@ namespace AsciidocLibrary.asciidoctoken
     //Todo 그리고 header에 들어가는 경우도 고민해봐야함
     
     
-    internal class TitleKeyword : Token
+    public class TitleKeyword : Token
     {
         public TitleKeyword(string title) : base(title) {
         }

@@ -11,6 +11,15 @@
 
   <ItemGroup>
     <Compile Remove="asciidoctoken\impl.cs" />
+    <Compile Remove="ConsoleApp2\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="ConsoleApp2\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ConsoleApp2\**" />
   </ItemGroup>
 
 </Project>

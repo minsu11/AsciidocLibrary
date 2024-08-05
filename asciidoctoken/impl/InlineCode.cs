@@ -6,7 +6,7 @@ namespace AsciidocLibrary.asciidoctoken
      * 예시 코드
      * `example`
      */
-    internal class InlineCode : Token
+    public class InlineCode : Token
     {
         public InlineCode(string content) : base(content)
         {

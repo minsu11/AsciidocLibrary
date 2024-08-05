@@ -2,7 +2,7 @@ using AsciidocLibrary.grammar;
 
 namespace AsciidocLibrary.asciidoctoken
 {
-    internal class Title : Token
+    public class Title : Token
     {
         private string TitleLevel { get; }
 

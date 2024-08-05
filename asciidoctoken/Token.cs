@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AsciidocLibrary.asciidoctoken
 {
-    internal abstract class Token : Grammar
+    public abstract class Token : Grammar
     {
         private string Content;
 

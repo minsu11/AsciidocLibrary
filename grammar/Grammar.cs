@@ -6,7 +6,7 @@ using AsciidocLibrary.grammar;
 
 namespace AsciidocLibrary
 {
-    internal interface Grammar
+    public interface Grammar
     {
         public String Accept(GrammarVisitor grammarVisitor);
 

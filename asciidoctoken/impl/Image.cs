@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AsciidocLibrary.asciidoctoken
 {
-    internal class Image : Token
+    public class Image : Token
     {
         public Image(string imageUrl) : base(imageUrl) { 
         }

@@ -5,10 +5,16 @@ using AsciidocLibrary.asciidoctoken;
 
 namespace AsciidocLibrary.grammar
 {
-    internal interface GrammarVisitor
+    public interface GrammarVisitor
     {
         string visit(Token token);
+        /**
+         * 제목 level에 따른 html 변환
+         */
         string visit(Title title);
+        /**
+         * [%hardbreak]와 같은 ascii doc 문법 변환
+         */
         string visit(Keyword keywordToken);
         string visit(TitleKeyword titleKeywordToken);
 
