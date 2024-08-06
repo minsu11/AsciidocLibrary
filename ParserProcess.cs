@@ -8,7 +8,8 @@ using System.Text;
 namespace AsciidocLibrary
 {
    public class ParserProcess
-    {
+   {
+       private string ImageDefaultPath;
         private ParserProcess()
         {
         }

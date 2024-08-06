@@ -10,12 +10,22 @@ namespace AsciidocLibrary.asciidoctoken
         private string Content;
 
         protected Token(string Content) { 
+            Precondition(Content);
             this.Content = Content;
         }
 
         public virtual string Accept(GrammarVisitor grammarVisitor)
         {
+
             return grammarVisitor.visit(this);
+        }
+
+        private void Precondition(string Content)
+        {
+            if (Content == null)
+            {
+                throw new ArgumentNullException(Content,"Token Content is null");
+            } 
         }
 
         public string GetContent()

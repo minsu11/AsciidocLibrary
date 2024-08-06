@@ -37,6 +37,10 @@ namespace AsciidocLibrary.asciidoctoken
     {
         public TitleKeyword(string title) : base(title) {
         }
+
+        public TitleKeyword() : base("")
+        {
+        }
        
         
         public override string Accept(GrammarVisitor grammarVisitor)

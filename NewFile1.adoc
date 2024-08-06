@@ -4,9 +4,13 @@ v1.0, 2024-07-30
 
 :toc: macro
 :toc-title: 목차
+:toclevels: 2
 :sectnums:
 :imagesdir: ./images
 :source-highlighter: highlightjs
+
+
+dsa *asd*
 
 == 1단계 제목
 
@@ -42,16 +46,7 @@ dsa
 * 두 번째 항목
 * 세 번째 항목
 
-
-
 === 번호 목록
-
-[%hardbreaks]
-dsada
-dsadas
-
-dsada
-dsa
 
 . 첫 번째 항목
 .. 첫 번째 항목의 하위 항목

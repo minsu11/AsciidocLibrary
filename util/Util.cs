@@ -11,11 +11,17 @@ namespace AsciidocLibrary
     public class Util
     {   //todo 정규식 사용해서 토큰화 => 
         // 굵기나 기울임 이런거를 replace를 해서 미리 
+        // toc일 경우엔 어떻게 할 것인가
+        // toc이면 전체 제목에 대해 목차를 생성 해줘야하는데
+        // s
         private static readonly string TITLE_CONTENT_REGEX = "[={1,6}] [\\wㄱ-ㅎㅏ-ㅣ가-힣]*";
         private static readonly string BOLD_CONTENT = "[\\*\\[\\w]*[\\*]";
         private static readonly string KEYWORD_REGEX_STRING = "[\\[]{1}[\\wㄱ-ㅎㅏ-ㅣ가-힣]*[\\]]{1}";
+        private static readonly string TITLE_KEYWORD_REGEX_STRING = "[\\:]{1}[\\wㄱ-ㅎㅏ-ㅣ가-힣]*[\\:]{1}";
         private static List<Token> tokenList = new List<Token>();
         private static readonly Regex KEYWORD_REGEX= new Regex(KEYWORD_REGEX_STRING);
+        // 제목 밑 keyword
+        private static readonly Regex TITLE_KEYWORD_REGEX = new Regex(TITLE_KEYWORD_REGEX_STRING);
         public Util() { 
             
         }
@@ -38,16 +44,19 @@ namespace AsciidocLibrary
                     // title level에 따른 데이터
                     tokenList.Add(new Title(arrToken[i], checkTitleLevel(arrToken[i])));
                 }
-                else if (BOLD_CONTENT.Equals(arrToken[i].Substring(0, 2)))
-                {
-                    
-                    tokenList.Add(new Bold(arrToken[i]));
-                }
-                else if (KEYWORD_REGEX.Match(arrToken[i]).Success)
-                {
-                    tokenList.Add(new Keyword(arrToken[i]));
-                }
-                else
+                // else if (BOLD_CONTENT.Equals(arrToken[i].Substring(0, 2)))
+                // {
+                //     tokenList.Add(new Bold(arrToken[i]));
+                // }
+                // else if (KEYWORD_REGEX.Match(arrToken[i]).Success)
+                // {
+                //     tokenList.Add(new Keyword(arrToken[i]));
+                // }
+                // else if (TITLE_KEYWORD_REGEX.Match(arrToken[i]).Success)
+                // {
+                //     tokenList.Add(new TitleKeyword(arrToken[i]));
+                // }
+                else if(!"".Equals(arrToken[i]))
                 {
                     // 굵기, 기울임, 코드, 고정폭은 content에서 해야할 듯
                     

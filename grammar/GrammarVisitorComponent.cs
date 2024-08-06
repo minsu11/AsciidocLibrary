@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using AsciidocLibrary.asciidoctoken;
 
 namespace AsciidocLibrary.grammar
@@ -24,12 +25,14 @@ namespace AsciidocLibrary.grammar
         }
         public string visit(Image image)
         {
-            return "<img";
+            // link가 포함이 있으면 a 태그 추가
+            return "<img src";
         }
         
         public string visit(Title title)
         {
-            return "<h" + title.GetTitleLevel() + ">" + title.GetContent() + "/<h" + title.GetTitleLevel() + ">";
+            Regex regex = new Regex("[=]{1,6} ");
+            return "<h" + title.GetTitleLevel() + ">\n\t" + regex.Replace(title.GetContent(),"") + "\n/<h" + title.GetTitleLevel() + ">\n";
         }
 
         
@@ -50,7 +53,7 @@ namespace AsciidocLibrary.grammar
 
         public string visit(Bold bold)
         {
-            throw new NotImplementedException();
+            return "<b>" + bold.GetContent() + "</b>\n";
         }
 
         public string visit(IncludeFile includeFile)
@@ -60,12 +63,33 @@ namespace AsciidocLibrary.grammar
 
         public string visit(NewLine newLine)
         {
-            throw new NotImplementedException();
+            return newLine.GetContent() + "</br>\n";
         }
 
         public string visit(Content content)
         {
-            return "<p>" + content.GetContent() + "</p>";
+            // string[] contentSplit = content.GetContent().Split("[^\\wㄱ-ㅎㅏ-ㅣ가-힣\\*]*");
+            // StringBuilder sb = new StringBuilder();
+            // Regex regex = new Regex(TokenRegex.GetRegex(RegexExpression.BoldContent));
+            // int idx = 0;
+            // foreach (var str in contentSplit)
+            // {
+            //     Console.WriteLine("       "+str); 
+            //     if (regex.Match(str).Success)
+            //     {
+            //         sb.Append(visit(new Bold(str)));
+            //     }
+            //
+            //     
+            //     sb.Append(str+" ");
+            //     idx++;
+            // }
+            Regex regex = new Regex("\\*(.*?)\\*");
+            
+
+            return "<p>\n"+regex.Replace(content.GetContent(),"<b>$1</b>\n")+"</p>\n";
+
         }
+
     }
 }
