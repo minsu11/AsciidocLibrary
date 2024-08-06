@@ -43,7 +43,9 @@ namespace AsciidocLibrary.grammar
 
         public string visit(Italic italic)
         {
-            throw new NotImplementedException();
+            // 기울기
+            return "<p>\n<I>\n" + italic.GetContent() + "\n</I>\n";
+
         }
 
         public string visit(Monospace monospace)
