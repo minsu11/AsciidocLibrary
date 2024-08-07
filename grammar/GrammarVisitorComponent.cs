@@ -96,5 +96,10 @@ namespace AsciidocLibrary.grammar
 
         }
 
+        public string visit(AsciiList asciiList)
+        {
+            return "";
+        }
+
     }
 }
