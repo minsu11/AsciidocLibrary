@@ -44,7 +44,7 @@ namespace AsciidocLibrary.grammar
         public string visit(Italic italic)
         {
             // 기울기
-            return "<p>\n<I>\n" + italic.GetContent() + "\n</I>\n";
+            return "<p>\n<I>\n" + italic.GetContent() + "\n</I>\n</p>";
 
         }
 
@@ -86,8 +86,11 @@ namespace AsciidocLibrary.grammar
             //     sb.Append(str+" ");
             //     idx++;
             // }
-            Regex regex = new Regex("\\*(.*?)\\*");
-            
+            // Regex regex = new Regex("[\\*]+(.*?)[\\*]+");
+            string pattern = @"(\*+)([^\* ]+)(\*+)";
+            Regex regex = new Regex(pattern);
+            Match m = regex.Match(content.GetContent());
+            Regex ItalicRegex = new Regex("[_]+(.*?)[_]+");
 
             return "<p>\n"+regex.Replace(content.GetContent(),"<b>$1</b>\n")+"</p>\n";
 
