@@ -33,5 +33,9 @@ namespace AsciidocLibrary.asciidoctoken
             return Content;
         }
 
+        public void SetContent(string Content)
+        {
+            this.Content = Content;
+        }
     }
 }

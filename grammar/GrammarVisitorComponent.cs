@@ -8,7 +8,10 @@ namespace AsciidocLibrary.grammar
 {
     public class GrammarVisitorComponent : GrammarVisitor
     {
+        
         private string[] titleKeywordArr = new[] { "hardbreaks" };
+        private static readonly string Bold_Regex = @"(\*+)([^\* ]+)(\*+)";
+        private static readonly string Italic_Regex = @"(\_+)([^\* ]+)(\_+)";
         public string visit(Token token)
         {
             return "";
@@ -26,7 +29,7 @@ namespace AsciidocLibrary.grammar
         public string visit(Image image)
         {
             // link가 포함이 있으면 a 태그 추가
-            return "<img src";
+            return "<img src=\"";
         }
         
         public string visit(Title title)
@@ -38,7 +41,7 @@ namespace AsciidocLibrary.grammar
         
         public string visit(Table table)
         {
-            throw new NotImplementedException();
+            return "";
         }
 
         public string visit(Italic italic)
@@ -50,17 +53,17 @@ namespace AsciidocLibrary.grammar
 
         public string visit(Monospace monospace)
         {
-            throw new NotImplementedException();
+            return "<code>\n" + monospace.GetContent() + "\n</code>\n";
         }
 
         public string visit(Bold bold)
         {
-            return "<b>" + bold.GetContent() + "</b>\n";
+            return "<b>" + bold.GetContent() + "</b>";
         }
 
         public string visit(IncludeFile includeFile)
         {
-            throw new NotImplementedException();
+            return "";
         }
 
         public string visit(NewLine newLine)
@@ -68,38 +71,83 @@ namespace AsciidocLibrary.grammar
             return newLine.GetContent() + "</br>\n";
         }
 
+        /// <summary>
+        /// 앞에 문법 없는 글씨.
+        /// 
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
         public string visit(Content content)
         {
-            // string[] contentSplit = content.GetContent().Split("[^\\wㄱ-ㅎㅏ-ㅣ가-힣\\*]*");
-            // StringBuilder sb = new StringBuilder();
-            // Regex regex = new Regex(TokenRegex.GetRegex(RegexExpression.BoldContent));
-            // int idx = 0;
-            // foreach (var str in contentSplit)
-            // {
-            //     Console.WriteLine("       "+str); 
-            //     if (regex.Match(str).Success)
-            //     {
-            //         sb.Append(visit(new Bold(str)));
-            //     }
-            //
-            //     
-            //     sb.Append(str+" ");
-            //     idx++;
-            // }
-            // Regex regex = new Regex("[\\*]+(.*?)[\\*]+");
-            string pattern = @"(\*+)([^\* ]+)(\*+)";
-            Regex regex = new Regex(pattern);
-            Match m = regex.Match(content.GetContent());
-            Regex ItalicRegex = new Regex("[_]+(.*?)[_]+");
-
-            return "<p>\n"+regex.Replace(content.GetContent(),"<b>$1</b>\n")+"</p>\n";
-
+            if (
+                Regex.Match( content.GetContent(),Bold_Regex).Success ||
+                Regex.Match(content.GetContent(),Italic_Regex).Success
+                )
+            {
+                content.SetContent(ConvertPTag(content.GetContent()));
+            }
+            return "<p>\n"+ content.GetContent()+"\n</p>\n";
         }
 
+       /// <summary>
+       /// 목록에 대한 문법에서 갯수가 중요
+       /// 
+       /// </summary>
+       /// <param name="asciiList"></param>
+       /// <returns></returns>
         public string visit(AsciiList asciiList)
         {
-            return "";
+            // level이 같으면
+            for (int i = 0; i < asciiList.GetLevel(); i++)
+            {
+                string str = "<ul\n><li>\n"+asciiList.GetContent()+"<\n</li>\n<ul>\n";
+                asciiList.SetContent(str);
+            }
+            return asciiList.GetContent();
         }
 
+     
+        
+
+        /// <summary>
+        /// 글씨, 굵은 글씨, 기울어진 글씨, monospace 등등의 각 속성에 맞게 문자열을 호출
+        /// 문자열이 Null이거나 빈 값인 경우 "" 반환함
+        /// . ! , ? 같은 특수 문자에 대해서 뒤에 공백 하나 더줌
+        /// </summary>
+        /// <param name="str">Ascii doc 문법 문장</param>
+        /// <returns></returns>
+        private string ConvertPTag(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return "";
+            }
+
+            string[] splitStr = str.Replace("([.,?!])([^ ]+)","$1 $2").Split(" ");
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < splitStr.Length; i++)
+            {
+                if (Regex.Match(splitStr[i],Bold_Regex).Success)
+                {
+                    sb.Append(visit(new Bold(splitStr[i]+" ")));
+                }
+                else if (Regex.Match(splitStr[i],Italic_Regex).Success)
+                {
+                    sb.Append(visit(new Italic(splitStr[i]+" ")));
+                }
+                else if(i < splitStr.Length-1)
+                {
+                    sb.Append(splitStr[i] + " ");
+                }
+                else
+                {
+                    sb.Append(splitStr[i]);
+                }
+                
+            }
+
+
+            return sb.ToString();
+        }
     }
 }

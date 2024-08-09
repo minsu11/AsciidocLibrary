@@ -8,13 +8,19 @@ v1.0, 2024-07-30
 :sectnums:
 :imagesdir: ./images
 :source-highlighter: highlightjs
+:strong: *
+
+[.bold]#Bold Text#
 
 
-dsa *asd*
+
+
+
 
 == 1단계 제목
 
-이것은 간단한 문단입니다. AsciiDoc은 다양한 텍스트 스타일을 지원합니다. *굵게*, _기울임_, `코드`, 그리고 `+dsa 고정 폭    텍스트+` 등이 가능합니다.
+이것은 간단한 문단입니다. AsciiDoc은 다양한 텍스트 스타일을 지원합니다. *굵게*, _기울임_, `코드`, 그리고 `+dsa 고정 폭      텍스트+` 등이 가능합니다.
+
 
 Hello, NHN Academy.
 [%hardbreak]
@@ -39,18 +45,36 @@ dsa
 
 === 불릿 목록
 
+___*sd*__
 
+
+
+** dasd
+
+** das
+
+* dsa
+
+
+
+*** das
+
+** 1234
 
 * 첫 번째 항목
 
 * 두 번째 항목
 * 세 번째 항목
+** dsa
+* dsa
 
 === 번호 목록
 
 . 첫 번째 항목
 .. 첫 번째 항목의 하위 항목
 . 두 번째 항목
+
+- ㅇㄴㅁ
 
 === 정의 목록
 
@@ -60,7 +84,7 @@ HTTP:: HyperText Transfer Protocol
 === 테이블
 
 [cols="3,7"]
-|===
+|======
 | 항목 | 설명
 
 | 항목 1
@@ -71,7 +95,7 @@ HTTP:: HyperText Transfer Protocol
 
 |항목3
 |ㅇㄴㅁㅇ
-|=== 
+|======
 
 .세로 병합
 [cols="3*"]

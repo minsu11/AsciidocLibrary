@@ -18,6 +18,7 @@ namespace AsciidocLibrary
         private static readonly string BOLD_CONTENT = "[\\*\\[\\w]*[\\*]";
         private static readonly string KEYWORD_REGEX_STRING = "[\\[]{1}[\\wㄱ-ㅎㅏ-ㅣ가-힣]*[\\]]{1}";
         private static readonly string TITLE_KEYWORD_REGEX_STRING = "[\\:]{1}[\\wㄱ-ㅎㅏ-ㅣ가-힣]*[\\:]{1}";
+        private static readonly string LIST_REGEX_STRING = "([^\\wㄱ-ㅎ가-힣\\n])*([\\\\*]+|[.]+|[-]+) ([\\wㄱ-ㅎ가-힣 ]+)";
         private static List<Token> tokenList = new List<Token>();
         private static readonly Regex KEYWORD_REGEX= new Regex(KEYWORD_REGEX_STRING);
         // 제목 밑 keyword
@@ -42,12 +43,16 @@ namespace AsciidocLibrary
                 else if (regex.Match(arrToken[i]).Success)
                 {
                     // title level에 따른 데이터
-                    tokenList.Add(new Title(arrToken[i], checkTitleLevel(arrToken[i])));
+                    tokenList.Add(new Title(arrToken[i], checkLevel(arrToken[i])));
                 }
-                // else if (BOLD_CONTENT.Equals(arrToken[i].Substring(0, 2)))
-                // {
-                //     tokenList.Add(new Bold(arrToken[i]));
-                // }
+                else if (BOLD_CONTENT.Equals(arrToken[i].Substring(0, 2)))
+                {
+                    tokenList.Add(new Bold(arrToken[i]));
+                }
+                else if (Regex.Match(arrToken[i], LIST_REGEX_STRING).Success)
+                {
+                    tokenList.Add(new AsciiList(arrToken[i]));
+                }
                 // else if (KEYWORD_REGEX.Match(arrToken[i]).Success)
                 // {
                 //     tokenList.Add(new Keyword(arrToken[i]));
@@ -88,9 +93,9 @@ namespace AsciidocLibrary
             return "";
         }
 
-        private string checkTitleLevel(string str)
+        private string checkLevel(string str)
         {
-            Regex regex = new Regex("=");
+            Regex regex = new Regex("=|\\*|\\.|\\-");
             return regex.Matches(str, 0).Count.ToString();
         }
     }
