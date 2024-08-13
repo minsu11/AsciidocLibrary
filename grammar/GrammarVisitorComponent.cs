@@ -44,28 +44,33 @@ namespace AsciidocLibrary.grammar
         
         public string visit(Table table)
         {
-            string[] contentArr = table.GetContent().Split("|");
+           
+            // table |[\w]갯수 만큼 제목
+            // 또는 [cols="1,2,3"] => cols 안에 칸수 마다
+            
+            return ;
+        }
+
+        private string ConvertTable(string TableContent)
+        {
+
+            string[] contentArr = TableContent.Split("|");
             StringBuilder sb = new StringBuilder();
             if (TABLE_COL == 0)
             {
                 TABLE_COL = 1;
                 string[] TableHead = contentArr[0].Split("|");
-                
+                for (int i = 0; i < TableHead.Length; i++)
+                {
+                    if (!string.IsNullOrEmpty(TableHead[i]))
+                    {
+                    }
+                }
             }
             else
             {
-                
+
             }
-            // table |[\w]갯수 만큼 제목
-            // 또는 [cols="1,2,3"] => cols 안에 칸수 마다
-            
-            return "";
-        }
-
-        private string ConvertTable(string TableContent)
-        {
-            
-
             return "";
         }
 
