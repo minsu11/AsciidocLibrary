@@ -8,6 +8,9 @@ namespace AsciidocLibrary.grammar
 {
     public class GrammarVisitorComponent : GrammarVisitor
     {
+        private static char NEW_LINE = '\n';
+        private int TABLE_COL = 0;
+        
         
         private string[] titleKeywordArr = new[] { "hardbreaks" };
         private static readonly string Bold_Regex = @"(\*+)([^\* ]+)(\*+)";
@@ -36,11 +39,33 @@ namespace AsciidocLibrary.grammar
         {
             Regex regex = new Regex("[=]{1,6} ");
             return "<h" + title.GetTitleLevel() + ">\n\t" + regex.Replace(title.GetContent(),"") + "\n/<h" + title.GetTitleLevel() + ">\n";
+            
         }
-
         
         public string visit(Table table)
         {
+            string[] contentArr = table.GetContent().Split("|");
+            StringBuilder sb = new StringBuilder();
+            if (TABLE_COL == 0)
+            {
+                TABLE_COL = 1;
+                string[] TableHead = contentArr[0].Split("|");
+                
+            }
+            else
+            {
+                
+            }
+            // table |[\w]갯수 만큼 제목
+            // 또는 [cols="1,2,3"] => cols 안에 칸수 마다
+            
+            return "";
+        }
+
+        private string ConvertTable(string TableContent)
+        {
+            
+
             return "";
         }
 
@@ -51,9 +76,33 @@ namespace AsciidocLibrary.grammar
 
         }
 
+        public string visit(InlineCode inlineCode)
+        {
+            var sb = new StringBuilder();
+            
+            return sb
+                .Append("<code>")
+                .Append(NEW_LINE)
+                .Append(inlineCode.GetContent())
+                .Append(NEW_LINE)
+                .Append("</code>")
+                .Append(NEW_LINE)
+                .ToString();
+            
+        }
+        
         public string visit(Monospace monospace)
         {
-            return "<code>\n" + monospace.GetContent() + "\n</code>\n";
+            StringBuilder sb = new StringBuilder();
+            // test `test`
+            return sb.Append("<p>")
+                .Append(NEW_LINE)
+                .Append("<pre>")
+                .Append(monospace.GetContent())
+                .Append(NEW_LINE)
+                .Append("/pre>")
+                .Append("</p>")
+                .ToString();
         }
 
         public string visit(Bold bold)

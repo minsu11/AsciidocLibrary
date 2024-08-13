@@ -27,5 +27,7 @@ namespace AsciidocLibrary.grammar
         string visit(NewLine newLine);
         string visit(AsciiList asciiList);
         string visit(Content content);
+        string visit(InlineCode inlineCode);
+
     }
 }

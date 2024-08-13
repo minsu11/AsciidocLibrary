@@ -5,8 +5,20 @@ using AsciidocLibrary;
 
 public class Program
 {
+    private static string Mono_Regex = "(`{1,2})[\\wㄱ-ㅎ가-힣]*\\1";
+    
     static void Main(string[] args)
     {
+        Regex MonoRegex = new Regex(Mono_Regex);
+        string input12 = "ㅁㄴㄹㅁㄴㅇ ``asd`` ㅁㅇㄴㅇㅁㄴ\n";
+        
+        if (MonoRegex.Match(input12).Success)
+        {
+            Console.WriteLine(MonoRegex.Match(input12).ToString());
+            Console.WriteLine("조건 확인");
+        }
+        
+        
         string example3 = "_apple_ dasd dasdsa _*asdf*_ _asfas_";
         string[] arrex = Regex.Split(example3,"[_]+[^ ]+[_]+");
         MatchCollection mat = Regex.Matches(example3,"[_]+[^ ]+[_]+");
@@ -56,11 +68,11 @@ public class Program
             
         str3 = regex.Replace(str3, "<b>$1</b>");
         Console.WriteLine(str3);
-        string str1 =
-            "= 문서 제목\nAuthor Name <author@example.com>\nv1.0, 2024-07-30\n\n:toc: macro\n:toc-title: 목차\n:sectnums:\n:imagesdir: ./images\n:source-highlighter: highlightjs\n\n\n== 1단계 제목\n\n이것은 간단한 문단입니다. AsciiDoc은 다양한 텍스트 스타일을 지원합니다. *굵게*, _기울임_, `코드`, 그리고 `+dsa 고정 폭    텍스트+` 등이 가능합니다.\n\nHello, NHN Academy.\n[%hardbreak]\nThis is a second line with a hard break.\n[%hardbreak]\nThis line should be separated by a break tag.\n\n\n\n\n[NOTE]\n====\n이것은 주의 상자입니다.\n====\n\n[TIP]\n====\ndsa\n====\n\n== 목록과 표\n\n=== 불릿 목록\n\n\n\n* 첫 번째 항목\n\n* 두 번째 항목\n* 세 번째 항목\n\n\n\n=== 번호 목록\n\n[%hardbreaks]\ndsada\ndsadas\n\ndsada\ndsa\n\n. 첫 번째 항목\n.. 첫 번째 항목의 하위 항목\n. 두 번째 항목"; 
-
-        string str = ParserProcess.Process(str3);
-
-        Console.WriteLine(str);
+        // string str1 =
+        //     "= 문서 제목\nAuthor Name <author@example.com>\nv1.0, 2024-07-30\n\n:toc: macro\n:toc-title: 목차\n:sectnums:\n:imagesdir: ./images\n:source-highlighter: highlightjs\n\n\n== 1단계 제목\n\n이것은 간단한 문단입니다. AsciiDoc은 다양한 텍스트 스타일을 지원합니다. *굵게*, _기울임_, `코드`, 그리고 `+dsa 고정 폭    텍스트+` 등이 가능합니다.\n\nHello, NHN Academy.\n[%hardbreak]\nThis is a second line with a hard break.\n[%hardbreak]\nThis line should be separated by a break tag.\n\n\n\n\n[NOTE]\n====\n이것은 주의 상자입니다.\n====\n\n[TIP]\n====\ndsa\n====\n\n== 목록과 표\n\n=== 불릿 목록\n\n\n\n* 첫 번째 항목\n\n* 두 번째 항목\n* 세 번째 항목\n\n\n\n=== 번호 목록\n\n[%hardbreaks]\ndsada\ndsadas\n\ndsada\ndsa\n\n. 첫 번째 항목\n.. 첫 번째 항목의 하위 항목\n. 두 번째 항목"; 
+        //
+        // string str = ParserProcess.Process(str3);
+        //
+        // Console.WriteLine(str);
     }
 }

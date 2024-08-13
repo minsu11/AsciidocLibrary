@@ -19,10 +19,17 @@ namespace AsciidocLibrary
         private static readonly string KEYWORD_REGEX_STRING = "[\\[]{1}[\\wㄱ-ㅎㅏ-ㅣ가-힣]*[\\]]{1}";
         private static readonly string TITLE_KEYWORD_REGEX_STRING = "[\\:]{1}[\\wㄱ-ㅎㅏ-ㅣ가-힣]*[\\:]{1}";
         private static readonly string LIST_REGEX_STRING = "([^\\wㄱ-ㅎ가-힣\\n])*([\\\\*]+|[.]+|[-]+) ([\\wㄱ-ㅎ가-힣 ]+)";
+        private static readonly string INLINECODE_REGEX_STRING = "(`{1,2})[\\wㄱ-ㅎ가-힣]+\\1";
+
+        private static readonly string TABLE_REGEX_STRING = "[|][=]+[\\n][ ]*";
+        
         private static List<Token> tokenList = new List<Token>();
         private static readonly Regex KEYWORD_REGEX= new Regex(KEYWORD_REGEX_STRING);
         // 제목 밑 keyword
         private static readonly Regex TITLE_KEYWORD_REGEX = new Regex(TITLE_KEYWORD_REGEX_STRING);
+ 
+        private string[] tocTitle;
+        
         public Util() { 
             
         }
@@ -53,14 +60,28 @@ namespace AsciidocLibrary
                 {
                     tokenList.Add(new AsciiList(arrToken[i]));
                 }
-                // else if (KEYWORD_REGEX.Match(arrToken[i]).Success)
-                // {
-                //     tokenList.Add(new Keyword(arrToken[i]));
-                // }
-                // else if (TITLE_KEYWORD_REGEX.Match(arrToken[i]).Success)
-                // {
-                //     tokenList.Add(new TitleKeyword(arrToken[i]));
-                // }
+                else if (false)
+                {
+                    // 여긴 code block 들어갈 자리
+                }
+                else if (Regex.Match(arrToken[i],INLINECODE_REGEX_STRING).Success)
+                {
+                    tokenList.Add(new InlineCode(arrToken[i]));
+                }
+                else if (Regex.Match(arrToken[i],TABLE_REGEX_STRING).Success)
+                {
+                    // 여기서 해야하나?
+                    StringBuilder sb = new StringBuilder();
+                    i++;
+                    while (!Regex.Match(arrToken[i], TABLE_REGEX_STRING).Success)
+                    {
+                        if (!string.IsNullOrEmpty(arrToken[i]))
+                        {
+                            sb.Append(arrToken[i]).Append("\n");
+                        }
+                    }
+                    tokenList.Add(new Table(sb.ToString()));
+                }
                 else if(!"".Equals(arrToken[i]))
                 {
                     // 굵기, 기울임, 코드, 고정폭은 content에서 해야할 듯
@@ -71,6 +92,11 @@ namespace AsciidocLibrary
 
             return tokenList;
 
+        }
+
+        private void StoreTable()
+        {
+            
         }
 
         private  void checkNull(Object o)
