@@ -21,13 +21,14 @@ namespace AsciidocLibrary
         private static readonly string LIST_REGEX_STRING = "([^\\wㄱ-ㅎ가-힣\\n])*([\\\\*]+|[.]+|[-]+) ([\\wㄱ-ㅎ가-힣 ]+)";
         private static readonly string INLINECODE_REGEX_STRING = "(`{1,2})[\\wㄱ-ㅎ가-힣]+\\1";
 
-        private static readonly string TABLE_REGEX_STRING = "[|][=]+[\\n][ ]*";
+        private static readonly string TABLE_REGEX_STRING = "[|][=]+";
         
         private static List<Token> tokenList = new List<Token>();
         private static readonly Regex KEYWORD_REGEX= new Regex(KEYWORD_REGEX_STRING);
         // 제목 밑 keyword
         private static readonly Regex TITLE_KEYWORD_REGEX = new Regex(TITLE_KEYWORD_REGEX_STRING);
  
+        // toc 메서드 있는 지 유무
         private string[] tocTitle;
         
         public Util() { 
@@ -43,7 +44,7 @@ namespace AsciidocLibrary
             
             for(int i = 0; i < arrToken.Length;i++)
             {
-                Console.WriteLine(arrToken[i]);
+                Console.WriteLine("token:"+arrToken[i]);
                 if (false) {
                     tokenList.Add(new TitleKeyword(arrToken[i]));
                 }
@@ -52,7 +53,7 @@ namespace AsciidocLibrary
                     // title level에 따른 데이터
                     tokenList.Add(new Title(arrToken[i], checkLevel(arrToken[i])));
                 }
-                else if (BOLD_CONTENT.Equals(arrToken[i].Substring(0, 2)))
+                else if (Regex.Match(arrToken[i],BOLD_CONTENT).Success)
                 {
                     tokenList.Add(new Bold(arrToken[i]));
                 }
@@ -70,22 +71,27 @@ namespace AsciidocLibrary
                 }
                 else if (Regex.Match(arrToken[i],TABLE_REGEX_STRING).Success)
                 {
+                    Console.WriteLine("table content");
                     // 여기서 해야하나?
                     StringBuilder sb = new StringBuilder();
-                    i++;
+                    i += 1;
                     while (!Regex.Match(arrToken[i], TABLE_REGEX_STRING).Success)
                     {
                         if (!string.IsNullOrEmpty(arrToken[i]))
                         {
+                            Console.WriteLine("if 문 안으로 들어옴");
                             sb.Append(arrToken[i]).Append("\n");
+                            Console.WriteLine("append");
+                            i += 1;
                         }
+
                     }
                     tokenList.Add(new Table(sb.ToString()));
                 }
                 else if(!"".Equals(arrToken[i]))
                 {
                     // 굵기, 기울임, 코드, 고정폭은 content에서 해야할 듯
-                    
+                    Console.WriteLine("content 구문 ");
                     tokenList.Add(new Content(arrToken[i]));
                 }
             }
